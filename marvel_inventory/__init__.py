@@ -20,11 +20,11 @@ app.config.from_object(Config)
 
 root_db.init_app(app)
 
+migrate = Migrate(app, root_db)
+
 login_manager.init_app(app)
 login_manager.login_view = 'auth.signin'
 ma.init_app(app)
-
-migrate = Migrate(app, root_db)
 
 CORS(app)
 
