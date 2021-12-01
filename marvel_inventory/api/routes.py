@@ -19,7 +19,7 @@ def create_character(current_user_token):
     super_power = request.json['super_power']
     user_token = current_user_token.token
 
-    character = Character(name, description, comics_appeared_in, super_power, user_token)
+    character = Character(name, description, comics_appeared_in, super_power, user_token = user_token)
     db.session.add(character)
     db.session.commit()
 
@@ -47,7 +47,7 @@ def get_character(current_user_token, id):
         return jsonify({'message': 'Valid Token Required'}), 401
 
 
-@api.route('/characters/<id>', methods = ['POST','PUT'])
+@api.route('/characters/<id>', methods = ['POST', 'PUT'])
 @token_required
 def update_character(current_user_token, id):
     character = Character.query.get(id)
@@ -56,8 +56,7 @@ def update_character(current_user_token, id):
     character.description = request.json['description']
     character.comics_appeared_in = request.json['comics_appeared_in']
     character.super_power = request.json['super_power']
-    # character.date_created = request.json['date_created']
-    character.user_token = current_user_token.token # !!!!...user token changed from owner...!!!
+    character.user_token = current_user_token.token
 
     db.session.commit()
     response = character_schema.dump(character)
