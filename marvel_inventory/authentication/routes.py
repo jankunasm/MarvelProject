@@ -43,6 +43,7 @@ def signin():
 
            
                 logged_user = User.query.filter(User.email == email).first()
+                print(logged_user.email)
                 if logged_user and check_password_hash(logged_user.password, password):
                     login_user(logged_user)
                     flash('You were successfully logged in', 'auth-success')

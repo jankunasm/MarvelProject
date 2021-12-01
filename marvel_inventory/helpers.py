@@ -9,9 +9,10 @@ def token_required(our_flask_function):
     @wraps(our_flask_function)
     def decorated( *args, **kwargs):
         token = None
-
+        print('I am line 12 :D')
         if 'x-access-token' in request.headers:
             token = request.headers['x-access-token'].split(' ')[1]
+            print('Heres the Token')
         if not token:
             return jsonify({'message': 'Token is Missing!'}), 401
 

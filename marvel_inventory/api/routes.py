@@ -17,10 +17,9 @@ def create_character(current_user_token):
     description = request.json['description']
     comics_appeared_in = request.json['comics_appeared_in']
     super_power = request.json['super_power']
-    date_created = request.json['date_created']
-    owner = current_user_token.token
+    user_token = current_user_token.token
 
-    character = Character(name, description, comics_appeared_in, super_power, date_created, owner)
+    character = Character(name, description, comics_appeared_in, super_power, user_token)
     db.session.add(character)
     db.session.commit()
 
