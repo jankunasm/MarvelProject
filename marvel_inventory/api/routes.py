@@ -56,8 +56,8 @@ def update_character(current_user_token, id):
     character.description = request.json['description']
     character.comics_appeared_in = request.json['comics_appeared_in']
     character.super_power = request.json['super_power']
-    character.date_created = request.json['date_created']
-    character.owner = current_user_token.token
+    # character.date_created = request.json['date_created']
+    character.user_token = current_user_token.token # !!!!...user token changed from owner...!!!
 
     db.session.commit()
     response = character_schema.dump(character)
